@@ -1,9 +1,7 @@
-name: ci
+name: manual
 
 on:
-  push:
-    branches:
-      - "main"
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,11 +25,11 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/qqminiapp-build-proxy:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/centos8:latest
       -
         name: Update repo description
         uses: peter-evans/dockerhub-description@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-          repository: ${{ secrets.DOCKER_HUB_USERNAME }}/qqminiapp-build-proxy
+          repository: ${{ secrets.DOCKER_HUB_USERNAME }}/centos8
